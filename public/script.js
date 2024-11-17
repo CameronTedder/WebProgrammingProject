@@ -124,6 +124,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         const data = await res.json();
         if (res.ok) {
             alert(data.message);
+
+            window.location.href = "profile.html";
         } else {
             alert(data.error);
         }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="profilestyles.css">
+</head>
+<body>
+    <div class="profile-container">
+        <header>
+            <h1>Welcome, [Username]</h1>
+        </header>
+        <div class="main-content">
+            <!-- Left Panel -->
+            <aside class="sidebar left-sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#">Feed</a></li>
+                    <li><a href="#">Game Selection</a></li>
+                    <li><a href="#">Leaderboards</a></li>
+                </ul>
+            </aside>
+
+            <!-- Center Content -->
+            <section class="profile-content">
+                <div class="profile-info">
+                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+                    <h2>[User Name]</h2>
+                    <button class="btn edit-profile-btn">Edit Profile</button>
+                </div>
+                <textarea class="post-input" placeholder="Write something for your profile..."></textarea>
+                <button class="btn post-btn">Post</button>
+                <div class="user-posts">
+                    <h3>Your Posts</h3>
+                    <div class="post">
+                        <h4>Post Title 1</h4>
+                        <p>This is an example post.</p>
+                    </div>
+                    <div class="post">
+                        <h4>Post Title 2</h4>
+                        <p>Another example post...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel -->
+            <aside class="sidebar right-sidebar">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Notifications</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
