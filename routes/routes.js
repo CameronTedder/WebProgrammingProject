@@ -12,6 +12,14 @@ router.get('/getCurrentUser', userController.getCurrentUser);
 router.post('/signout', userController.signout);
 router.get("/check-auth", userController.checkAuth);
 
+//Profile routes
+router.get('/profile', userController.getUserProfile);  
+router.put('/profile', userController.updateUserProfile);
+
+//Notification routes
+router.get('/notifications', userController.getUserNotifications);
+router.post('/notifications/:notificationId/read', userController.markNotificationAsRead);
+
 //Post routes
 router.post('/addPost', postController.addPost);
 router.delete('/removePost/:post_id', postController.removePost);

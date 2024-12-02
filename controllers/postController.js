@@ -54,15 +54,44 @@ exports.addComment = async (req, res) => {
     }
 
     try {
+        // Insert the comment into the database
         const result = await db.promise().query(
             "INSERT INTO Comment (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, NOW())",
             [post_id, user_id, comment_text]
         );
+
+        // After comment is added, insert a notification for the post owner
+        const postOwnerId = await getPostOwnerId(post_id);  // Assuming you have a way to get the post owner ID
+
+        if (postOwnerId && postOwnerId !== user_id) {
+            const notificationMessage = `New comment on your post: "${comment_text}"`;
+
+            // Insert the notification into the database
+            await db.promise().query(
+                "INSERT INTO notifications (user_id, message) VALUES (?, ?)",
+                [postOwnerId, notificationMessage]
+            );
+        }
+
+        // Respond back to the client
         res.status(201).json({ message: "Comment added successfully.", comment_id: result.insertId });
     } catch (err) {
         res.status(500).json({ error: "Failed to add comment.", details: err.message });
     }
 };
+
+async function getPostOwnerId(post_id) {
+    try {
+        const [rows] = await db.promise().query("SELECT user_id FROM Post WHERE post_id = ?", [post_id]);
+        if (rows.length > 0) {
+            return rows[0].user_id;
+        }
+        return null;  // If post is not found, return null
+    } catch (err) {
+        console.error("Error fetching post owner ID:", err);
+        return null;
+    }
+}
 
 // exports.addComment = async (req, res) => {
 //     const { post_id, user_id, comment_text } = req.body;
@@ -71,37 +100,16 @@ exports.addComment = async (req, res) => {
 //     }
 
 //     try {
-//         // Insert the comment
-//         const [result] = await db.promise().query(
+//         const result = await db.promise().query(
 //             "INSERT INTO Comment (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, NOW())",
 //             [post_id, user_id, comment_text]
 //         );
-
-//         // Retrieve the user's firstname and lastname
-//         const [userResult] = await db.promise().query(
-//             "SELECT firstname, lastname FROM User WHERE user_id = ?",
-//             [user_id]
-//         );
-
-//         if (userResult.length === 0) {
-//             return res.status(404).json({ error: "User not found." });
-//         }
-
-//         const { firstname, lastname } = userResult[0];
-
-//         // Return success response with the comment ID and user details
-//         res.status(201).json({
-//             message: "Comment added successfully.",
-//             comment_id: result.insertId,
-//             user: {
-//                 firstname,
-//                 lastname,
-//             },
-//         });
+//         res.status(201).json({ message: "Comment added successfully.", comment_id: result.insertId });
 //     } catch (err) {
 //         res.status(500).json({ error: "Failed to add comment.", details: err.message });
 //     }
 // };
+
 
 // Remove a comment from the database
 exports.removeComment = async (req, res) => {
@@ -201,31 +209,6 @@ exports.getCommentsForPost = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch comments.", details: err.message });
     }
 };
-
-// exports.getCommentsForPost = async (req, res) => {
-//     const { post_id } = req.query;  // Fetch the post_id from query parameters
-
-//     if (!post_id) {
-//         return res.status(400).json({ error: "Post ID is required." });
-//     }
-
-//     try {
-//         // Query for comments related to the given post_id
-//         const [comments] = await db.promise().query(
-//             "SELECT * FROM Comment WHERE post_id = ? ORDER BY created_at ASC", 
-//             [post_id]
-//         );
-
-//         if (comments.length === 0) {
-//             return res.status(404).json({ message: "No comments found for this post." });
-//         }
-
-//         res.status(200).json(comments);  // Return the comments as JSON
-//     } catch (err) {
-//         console.error("Error fetching comments:", err);
-//         res.status(500).json({ error: "Failed to fetch comments.", details: err.message });
-//     }
-// };
 
 exports.getAllPosts = async (req, res) => {
     try {

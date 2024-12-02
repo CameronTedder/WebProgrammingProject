@@ -87,3 +87,75 @@ exports.checkAuth = (req, res) => {
     }
     return res.status(401).json({ message: 'Not authenticated' });
 };
+
+exports.getUserProfile = (req, res) => {
+    if (!req.session.user_id) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
+
+    const userId = req.session.user_id;
+
+    const sql = `SELECT firstname, lastname, avatar_img FROM User WHERE user_id = ?`;
+    db.query(sql, [userId], (err, rows) => {
+        if (err || rows.length === 0) {
+            return res.status(500).json({ error: "Failed to retrieve user data" });
+        }
+        const user = rows[0];
+        res.status(200).json({ user });
+    });
+};
+
+exports.updateUserProfile = (req, res) => {
+    if (!req.session.user_id) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
+
+    const { firstname, lastname, avatar_img } = req.body;
+    const userId = req.session.user_id;
+
+    const sql = `UPDATE User SET firstname = ?, lastname = ?, avatar_img = ? WHERE user_id = ?`;
+    db.query(sql, [firstname, lastname, avatar_img, userId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: "Failed to update profile" });
+        }
+        res.status(200).json({ message: "Profile updated successfully" });
+    });
+};
+
+exports.getUserNotifications = (req, res) => {
+    if (!req.session.user_id) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
+
+    const userId = req.session.user_id;
+    const showRead = req.query.showRead === "true"; // Check if the query parameter is `true`
+
+    // SQL to fetch notifications based on read status
+    const sql = showRead
+        ? "SELECT * FROM notifications WHERE user_id = ? AND is_read = TRUE ORDER BY created_at DESC"
+        : "SELECT * FROM notifications WHERE user_id = ? AND is_read = FALSE ORDER BY created_at DESC";
+
+    db.query(sql, [userId], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ error: "Failed to fetch notifications" });
+        }
+        res.status(200).json({ notifications: rows });
+    });
+};
+
+exports.markNotificationAsRead = (req, res) => {
+    if (!req.session.user_id) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
+
+    const notificationId = req.params.notificationId;
+
+    const sql = "UPDATE notifications SET is_read = TRUE WHERE notification_id = ?";
+    db.query(sql, [notificationId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: "Failed to mark notification as read" });
+        }
+
+        res.status(200).json({ message: "Notification marked as read" });
+    });
+};
