@@ -159,3 +159,27 @@ exports.markNotificationAsRead = (req, res) => {
         res.status(200).json({ message: "Notification marked as read" });
     });
 };
+
+exports.getUserDetails = (req, res) => {
+    const userId = req.params.userId;
+    const sql = "SELECT firstname, lastname FROM user WHERE user_id = ?";
+    db.query(sql, [userId], (err, rows) => {
+        if (err) {
+            console.error(err);  // Log error
+            return res.status(500).json({ error: "Failed to fetch user details" });
+        }
+        if (rows.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        res.status(200).json(rows[0]);
+    });
+};
+
+exports.getUserPosts = (req, res) => {
+    const userId = req.params.userId;
+    const sql = "SELECT post_text, created_at FROM post WHERE user_id = ? ORDER BY created_at DESC";
+    db.query(sql, [userId], (err, rows) => {
+        if (err) return res.status(500).json({ error: "Failed to fetch user posts" });
+        res.status(200).json(rows);
+    });
+};

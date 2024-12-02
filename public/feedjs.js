@@ -57,13 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const commentDate = new Date(comment.created_at).toLocaleDateString();
     
                 commentElement.innerHTML = `
-                    <p>${comment.comment_text}</p>
-                    <small>Posted by ${comment.firstname} ${comment.lastname} on ${commentDate}</small>
-                    ${comment.user_id === currentUserId 
-                        ? `<button class="delete-comment-btn" data-comment-id="${comment.comment_id}">🗑️ Delete</button>` 
-                        : ""
-                    }
-                `;
+                <p>${comment.comment_text}</p>
+                <small>
+                    Posted by 
+                    <a href="otherprofile.html?user_id=${comment.user_id}" class="commenter-link">
+                        ${comment.firstname} ${comment.lastname}
+                    </a> 
+                    on ${commentDate}
+                </small>
+                ${comment.user_id === currentUserId 
+                    ? `<button class="delete-comment-btn" data-comment-id="${comment.comment_id}">🗑️ Delete</button>` 
+                    : ""
+                }
+            `;
                 commentsContainer.appendChild(commentElement);
     
                 // Add event listener for the delete button (if present)
@@ -140,15 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 postElement.dataset.postId = post.post_id; // Store post ID for easy reference
 
                 postElement.innerHTML = `
-                    <h4>${post.post_text}</h4>
-                    <small>Posted by ${post.username || "Unknown User"} on ${new Date(post.created_at).toLocaleDateString()}</small>
-                    <button class="view-comments" data-post-id="${post.post_id}">View Comments</button>
-                    <div class="comment-section" id="comments-${post.post_id}" style="display: none;">
-                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                        <button class="add-comment-btn" data-post-id="${post.post_id}">Add Comment</button>
-                        <div class="comments-container" id="comments-list-${post.post_id}"></div>
-                    </div>
-                `;
+                <h4>${post.post_text}</h4>
+                <small>
+                    Posted by <a href="otherprofile.html?user_id=${post.user_id}" class="user-link">
+                        ${post.username || "Unknown User"}
+                    </a> on ${new Date(post.created_at).toLocaleDateString()}
+                </small>
+                <button class="view-comments" data-post-id="${post.post_id}">View Comments</button>
+                <div class="comment-section" id="comments-${post.post_id}" style="display: none;">
+                    <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                    <button class="add-comment-btn" data-post-id="${post.post_id}">Add Comment</button>
+                    <div class="comments-container" id="comments-list-${post.post_id}"></div>
+                </div>
+            `;
 
                 feedPostsContainer.appendChild(postElement);
 

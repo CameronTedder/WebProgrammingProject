@@ -16,6 +16,10 @@ router.get("/check-auth", userController.checkAuth);
 router.get('/profile', userController.getUserProfile);  
 router.put('/profile', userController.updateUserProfile);
 
+//Other users profile routes
+router.get('/userDetails/:userId', userController.getUserDetails);
+router.get('/userPosts/:userId', userController.getUserPosts);
+
 //Notification routes
 router.get('/notifications', userController.getUserNotifications);
 router.post('/notifications/:notificationId/read', userController.markNotificationAsRead);
