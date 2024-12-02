@@ -26,21 +26,14 @@
             <section class="profile-content">
                 <div class="profile-info">
                     <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
-                    <h2>[User Name]</h2>
+                    <br>
                     <button class="btn edit-profile-btn">Edit Profile</button>
                 </div>
                 <textarea class="post-input" placeholder="Write something for your profile..."></textarea>
                 <button class="btn post-btn">Post</button>
                 <div class="user-posts">
                     <h3>Your Posts</h3>
-                    <div class="post">
-                        <h4>Post Title 1</h4>
-                        <p>This is an example post.</p>
-                    </div>
-                    <div class="post">
-                        <h4>Post Title 2</h4>
-                        <p>Another example post...</p>
-                    </div>
+                    <div id="post-container"></div>
                 </div>
             </section>
 
@@ -55,5 +48,7 @@
             </aside>
         </div>
     </div>
+
+    <script src="profilejs.js"></script>
 </body>
 </html>

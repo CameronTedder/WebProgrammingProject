@@ -68,7 +68,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
 
     // If the form is valid, send data to the server
     if (isValid) {
-        const res = await fetch('/api/users/register', {
+        const res = await fetch('/api/routes/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -112,7 +112,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
     // If the form is valid, send data to the server
     if (isValid) {
-        const res = await fetch('/api/users/login', {
+        const res = await fetch('/api/routes/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
