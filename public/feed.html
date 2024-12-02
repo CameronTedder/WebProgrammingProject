@@ -3,36 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
+    <title>Feed Page</title>
     <link rel="stylesheet" href="profilestyles.css">
 </head>
 <body>
-    <div class="profile-container">
+    <div class="feed-container">
         <header>
-            <h1 id="welcome-message">Welcome, [Username]</h1>
+            <h1>Name of the Website</h1>
         </header>
         <div class="main-content">
             <!-- Left Panel -->
             <aside class="sidebar left-sidebar">
                 <h3>Navigation</h3>
                 <ul>
-                    <li><a href="feed.html">Feed</a></li>
+                    <li><a href="profile.html">Profile</a></li>
                     <li><a href="#">Game Selection</a></li>
                     <li><a href="#">Leaderboards</a></li>
                 </ul>
             </aside>
 
             <!-- Center Content -->
-            <section class="profile-content">
-                <div class="profile-info">
-                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
-                    <br>
-                    <button class="btn edit-profile-btn">Edit Profile</button>
-                </div>
-                <textarea class="post-input" placeholder="Write something for your profile..."></textarea>
+            <section class="feed-content">
+                <textarea class="post-input" placeholder="Share something with everyone..."></textarea>
                 <button class="btn post-btn">Post</button>
-                <div class="user-posts">
-                    <h3>Your Posts</h3>
+                <div class="feed-posts">
+                    <h3>Community Feed</h3>
                     <div id="post-container"></div>
                 </div>
             </section>
@@ -48,7 +43,7 @@
             </aside>
         </div>
     </div>
-    
-    <script src="profilejs.js"></script>
+
+    <script src="feedjs.js"></script>
 </body>
 </html>

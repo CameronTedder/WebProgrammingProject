@@ -14,6 +14,14 @@ body {
     padding: 20px;
 }
 
+.feed-container {
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
 /* Header */
 header {
     text-align: center;
@@ -25,6 +33,7 @@ header {
     display: flex;
     gap: 20px;
 }
+
 
 /* Sidebar Styles */
 .sidebar {
@@ -56,6 +65,11 @@ header {
 
 .sidebar ul li a:hover {
     text-decoration: underline;
+}
+
+.feed-content {
+    flex: 2;
+    text-align: center;
 }
 
 /* Profile Content */
@@ -103,6 +117,13 @@ textarea.post-input {
 
 /* User Posts Section */
 .user-posts {
+    text-align: left;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.feed-posts {
     text-align: left;
     margin-top: 20px;
     border-top: 1px solid #ddd;

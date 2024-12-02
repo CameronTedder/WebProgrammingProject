@@ -1,7 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const userPostsContainer = document.querySelector(".user-posts");
+    const userPostsContainer = document.querySelector("#post-container");
     let currentUserId;
-    const welcomeMessage = document.querySelector("h1");
+    const welcomeMessage = document.querySelector("#welcome-message");
+    const signoutLink = document.getElementById("signout-link");
+
+    const checkAuthentication = async () => {
+        try {
+            const response = await fetch('/api/routes/check-auth');
+            if (response.status === 401) {
+                // If not authenticated, redirect to login page
+                window.location.href = 'index.html';
+            }
+        } catch (err) {
+            console.error("Error checking authentication:", err);
+            window.location.href = 'index.html';  // Redirect in case of error
+        }
+    };
 
     const fetchCurrentUserId = async () => {
         try {
@@ -15,13 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
             fetchUserName(currentUserId);
 
             // Fetch user posts only after fetching the user ID
+           
             fetchUserPosts();
+            
         } catch (err) {
             console.error("Error fetching current user ID:", err);
             alert("Failed to fetch current user. Please log in.");
         }
     };
 
+    
     const fetchUserName = async (userId) => {
         try {
             const response = await fetch(`/api/routes/getUserName?user_id=${userId}`);
@@ -42,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Failed to load first name.");
         }
     };
-
+    
     const fetchUserPosts = async () => {
         if (!currentUserId) {
             console.error("User ID is not set. Cannot fetch posts.");
@@ -124,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+
     const addComment = async (postId, commentText) => {
         try {
             const response = await fetch("/api/routes/addComment", {
@@ -173,10 +191,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
                 commentElement.innerHTML = `
                     <p>${comment.comment_text}</p>
-                    <small>Commented by User ${comment.user_id} on ${commentDate}</small>
-                    ${comment.user_id === currentUserId || postUserId === currentUserId
-                        ? `<button class="delete-comment-btn" data-comment-id="${comment.comment_id}">🗑️</button>`
-                        : ''}
+                    <small>
+                        Commented by ${comment.firstname} ${comment.lastname} on ${commentDate}
+                    </small>
+                    ${
+                        comment.user_id === currentUserId || postUserId === currentUserId
+                            ? `<button class="delete-comment-btn" data-comment-id="${comment.comment_id}">🗑️</button>`
+                            : ""
+                    }
                 `;
     
                 commentsContainer.appendChild(commentElement);
@@ -275,5 +297,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    if (signoutLink) {
+        signoutLink.addEventListener("click", async (e) => {
+            e.preventDefault(); // Prevent the default link action
+
+            try {
+                // Call the backend signout API
+                const response = await fetch('/api/routes/signout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+
+                if (response.ok) {
+                    // Redirect to index.html on success
+                    window.location.href = "index.html";
+                } else {
+                    const error = await response.json();
+                    console.error("Error during signout:", error.message);
+                    alert(error.message || "Failed to sign out. Please try again.");
+                }
+            } catch (err) {
+                console.error("Error during signout:", err);
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    }
+
     fetchCurrentUserId();
+    checkAuthentication();
+    
 });
+

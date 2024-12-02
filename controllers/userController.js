@@ -72,11 +72,18 @@ exports.getUserName = async (req, res) => {
     }
 };
 
-exports.logout = (req, res) => {
+exports.signout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).json({ error: "Failed to log out." });
         }
         res.status(200).json({ message: "Logged out successfully." });
     });
+};
+
+exports.checkAuth = (req, res) => {
+    if (req.session.user_id) {
+        return res.status(200).json({ message: "Authenticated" });
+    }
+    return res.status(401).json({ message: 'Not authenticated' });
 };
