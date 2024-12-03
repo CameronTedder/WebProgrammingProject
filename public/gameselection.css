@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Game Selection Container */
+  .game-selection-container {
+    text-align: center;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 90%;
+  }
+  
+  /* Header */
+  header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Main Content */
+  .game-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  /* Individual Game Cards */
+  .game-card {
+    background-color: #666;
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .game-card:hover {
+    transform: scale(1.05);
+    background-color: #888;
+  }
+  
+  /* Featured Game */
+  .featured {
+    background-color: #888;
+    font-weight: bold;
+  }
+  
+  .featured:hover {
+    background-color: #aaa;
+  }
+  
+  /* Footer */
+  footer p {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-top: 20px;
+  }
