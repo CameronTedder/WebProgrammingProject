@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h4>${post.post_text}</h4>
                 <small>
                     Posted by <a href="otherprofile.html?user_id=${post.user_id}" class="user-link">
-                        ${post.username || "Unknown User"}
+                        ${post.firstname} ${post.lastname || "Unknown User"}
                     </a> on ${new Date(post.created_at).toLocaleDateString()}
                 </small>
                 <button class="view-comments" data-post-id="${post.post_id}">View Comments</button>
@@ -208,6 +208,41 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Failed to delete comment. Please try again later.");
         }
     };
+
+    //Add new post
+    document.querySelector(".btn.post-btn").addEventListener("click", async () => {
+        console.log("Post button clicked!");
+        
+        const postInput = document.querySelector(".post-input");
+        const postText = postInput.value.trim();
+    
+        if (!postText) {
+            alert("Post cannot be empty!");
+            return;
+        }
+    
+        try {
+            const response = await fetch("/api/routes/addPost", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: currentUserId, post_text: postText }), // Replace with dynamic user_id
+            });
+    
+            const result = await response.json();
+            if (response.ok) {
+                postInput.value = ""; // Clear input field
+                alert("Post added successfully!");
+    
+                // Reload the posts list to include the newly added post
+                fetchUserPosts(); // Fetch and update the posts list dynamically
+            } else {
+                console.error(result.error);
+                alert("Failed to add post.");
+            }
+        } catch (err) {
+            console.error("Error adding post:", err);
+        }
+    });
 
     if (signoutLink) {
         signoutLink.addEventListener("click", async (e) => {

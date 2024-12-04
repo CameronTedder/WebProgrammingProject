@@ -24,6 +24,17 @@ body {
     padding: 20px;
 }
 
+.profile-container a, .feed-container a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #007BFF;  /* Keeps the color consistent with your theme */
+}
+
+.profile-container a:hover, .feed-container a:hover {
+    color: #0056b3;  /* Darker shade on hover */
+    text-decoration: underline;  /* Add underline on hover */
+}
+
 /* Header */
 header {
     text-align: center;
@@ -84,6 +95,11 @@ header h1 {
 
 /* Profile Content */
 .profile-content {
+    flex: 2;
+    text-align: center;
+}
+
+.feed-content {
     flex: 2;
     text-align: center;
 }

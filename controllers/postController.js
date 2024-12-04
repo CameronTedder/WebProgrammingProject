@@ -93,23 +93,6 @@ async function getPostOwnerId(post_id) {
     }
 }
 
-// exports.addComment = async (req, res) => {
-//     const { post_id, user_id, comment_text } = req.body;
-//     if (!post_id || !user_id || !comment_text) {
-//         return res.status(400).json({ error: "Post ID, user ID, and comment text are required." });
-//     }
-
-//     try {
-//         const result = await db.promise().query(
-//             "INSERT INTO Comment (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, NOW())",
-//             [post_id, user_id, comment_text]
-//         );
-//         res.status(201).json({ message: "Comment added successfully.", comment_id: result.insertId });
-//     } catch (err) {
-//         res.status(500).json({ error: "Failed to add comment.", details: err.message });
-//     }
-// };
-
 
 // Remove a comment from the database
 exports.removeComment = async (req, res) => {
@@ -213,7 +196,12 @@ exports.getCommentsForPost = async (req, res) => {
 exports.getAllPosts = async (req, res) => {
     try {
         // Query the database using promise-based API (mysql2)
-        const [rows] = await db.promise().query("SELECT * FROM Post ORDER BY created_at DESC");
+        const [rows] = await db.promise().query(`
+            SELECT Post.post_id, Post.post_text, Post.created_at, User.firstname, User.lastname
+            FROM Post
+            JOIN User ON Post.user_id = User.user_id
+            ORDER BY Post.created_at DESC
+        `);
 
         // Log the rows to confirm they are being retrieved
         console.log("All posts retrieved:", rows);

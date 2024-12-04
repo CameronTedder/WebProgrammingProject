@@ -190,16 +190,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 const commentDate = new Date(comment.created_at).toLocaleDateString();
     
                 commentElement.innerHTML = `
-                    <p>${comment.comment_text}</p>
-                    <small>
-                        Commented by ${comment.firstname} ${comment.lastname} on ${commentDate}
-                    </small>
-                    ${
-                        comment.user_id === currentUserId || postUserId === currentUserId
-                            ? `<button class="delete-comment-btn" data-comment-id="${comment.comment_id}">🗑️</button>`
-                            : ""
-                    }
-                `;
+                <p>${comment.comment_text}</p>
+                <small>
+                    Posted by 
+                    <a href="otherprofile.html?user_id=${comment.user_id}" class="commenter-link">
+                        ${comment.firstname} ${comment.lastname}
+                    </a> 
+                    on ${commentDate}
+                </small>
+                ${comment.user_id === currentUserId 
+                    ? `<button class="delete-comment-btn" data-comment-id="${comment.comment_id}">🗑️ Delete</button>` 
+                    : ""
+                }
+            `;
     
                 commentsContainer.appendChild(commentElement);
     
