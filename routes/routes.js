@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../db');
 const userController = require("../controllers/userController");
 const postController = require("../controllers/postController");
+const gameController  = require("../controllers/gameController");
 
 //User routes
 router.post('/register', userController.registerUser);
@@ -33,5 +34,8 @@ router.get('/posts', postController.getPostsByUser);
 router.get('/comments', postController.getCommentsForPost);
 router.get('/allPosts', postController.getAllPosts);
 
+//Game routes
+router.get('/games/:gameId/leaderboard', gameController.getLeaderboard);
+router.post('/submitScore', gameController.submitScore);
 
 module.exports = router;
