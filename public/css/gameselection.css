@@ -25,6 +25,21 @@ body {
     font-size: 1.5rem;
     margin-bottom: 20px;
   }
+
+  nav {
+    margin-bottom: 20px;
+  }
+
+  nav .nav-link {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+
+  nav .nav-link:hover {
+    color: #0056b3;
+  }
   
   /* Main Content */
   .game-cards {

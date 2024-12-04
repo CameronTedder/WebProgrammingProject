@@ -1,50 +1,107 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #1e1e1e;
     margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 200px;
+    background-color: #242424;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-right: 20px;
+}
+
+.sidebar h3 {
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
     padding: 0;
 }
 
+.sidebar ul li {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
 .settings-container {
-    width: 80%;
+    width: 100%;
     max-width: 600px;
-    margin: 50px auto;
-    background-color: white;
+    background-color: #333333;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #fff;
 }
 
 label {
     display: block;
     margin-top: 10px;
-    color: #555;
+    color: #bbb;
 }
 
 input {
     width: 100%;
-    padding: 8px;
+    max-width: 100%;
+    padding: 10px;
     margin: 5px 0 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
     border-radius: 4px;
+    background-color: #242424;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: #888;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 .message {
@@ -59,6 +116,8 @@ button:hover {
     margin: 5px;
     border: 1px solid #ddd;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .notification:hover {

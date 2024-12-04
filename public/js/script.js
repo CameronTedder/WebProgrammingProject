@@ -22,6 +22,29 @@ function isValidPassword(password) {
     return password.length >= 6 && /\d/.test(password);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loginContainer = document.getElementById('login-container');
+    const registerContainer = document.getElementById('register-container');
+    const loginButton = document.getElementById('show-login');
+    const registerButton = document.getElementById('show-register');
+
+    // Show Login Form by Default
+    loginButton.addEventListener('click', () => {
+        loginContainer.classList.add('active');
+        registerContainer.classList.remove('active');
+        loginButton.classList.add('active');
+        registerButton.classList.remove('active');
+    });
+
+    // Show Register Form
+    registerButton.addEventListener('click', () => {
+        registerContainer.classList.add('active');
+        loginContainer.classList.remove('active');
+        registerButton.classList.add('active');
+        loginButton.classList.remove('active');
+    });
+});
+
 // Register Form Validation
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent default form submission

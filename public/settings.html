@@ -7,22 +7,34 @@
     <link rel="stylesheet" href="css/settings.css">
 </head>
 <body>
-    <div class="settings-container">
-        <h1>Edit Profile</h1>
-        <form id="settings-form">
-            <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" name="firstname" required>
-            
-            <label for="lastname">Last Name:</label>
-            <input type="text" id="lastname" name="lastname" required>
-            
-            <label for="avatar_img">Avatar Image URL:</label>
-            <input type="text" id="avatar_img" name="avatar_img">
+    <div class="container">
 
-            <button type="submit">Save Changes</button>
-        </form>
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="profile.html">Back to Profile</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+            </ul>
+        </div>
 
-        <div class="message" id="message"></div>
+        <div class="settings-container">
+            <h1>Edit Profile</h1>
+            <form id="settings-form">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required>
+                
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required>
+                
+                <label for="avatar_img">Avatar Image URL:</label>
+                <input type="text" id="avatar_img" name="avatar_img">
+
+                <button type="submit">Save Changes</button>
+            </form>
+
+            <div class="message" id="message"></div>
+        </div>
     </div>
 
     <script src="js/settingsjs.js"></script>

@@ -7,25 +7,44 @@
     <link rel="stylesheet" href="css/leaderboards.css">
 </head>
 <body>
-    <header>
-        <h1>Leaderboard</h1>
-        <p>Top 5 scores for the game</p>
-    </header>
 
-    <div class="leaderboard-container">
-        <table id="leaderboard">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Highscore</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic rows will be inserted here -->
-            </tbody>
-        </table>
+    <div class="sidebar" id="sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <!-- Sidebar for unauthorized users -->
+            <li><a href="index.html" id="homeLink">Home</a></li>
+            <li><a href="login-registration.html" id="loginLink">Login</a></li>
+
+            <!-- Sidebar for Authorized users -->
+            <li><a href="profile.html" id="profileLink" style="display:none;">Profile</a></li>
+            <li><a href="feed.html" id="feedLink" style="display:none;">Feed</a></li>
+            <li><a href="settings.html" id="settingsLink" style="display:none;">Settings</a></li>
+            <li><a href="notifications.html" id="notifsLink" style="display:none;">Notifications</a></li>
+        </ul>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Leaderboard</h1>
+            <p>Top 5 scores for the game</p>
+        </header>
+
+        <div class="leaderboard-container">
+            <table id="leaderboard">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Highscore</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="js/leaderboardsjs.js"></script>
