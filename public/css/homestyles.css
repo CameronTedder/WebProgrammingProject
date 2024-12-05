@@ -20,13 +20,18 @@ body {
   }
   
   .logo {
-    text-align: center;
-  }
-  
-  .logo img {
-    max-width: 80%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 10px; 
+    width: 100px; 
+    margin: 20px auto;
+}
+
+.logo img {
+    width: 80px; 
     height: auto;
-  }
+}
   
   .right-section {
     flex: 1;

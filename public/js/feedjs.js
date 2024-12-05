@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 console.log("Comment added successfully:", result);
                 fetchComments(postId); // Reload comments for the post
+                document.querySelector('.comment-input').value = '';
             } else {
                 console.error("Failed to add comment:", result.message);
                 alert(result.message || "Failed to add comment.");

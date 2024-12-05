@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentUserId;
     const welcomeMessage = document.querySelector("#welcome-message");
     const signoutLink = document.getElementById("signout-link");
+    const profilePicture = document.getElementById("profile-picture");
 
     const checkAuthentication = async () => {
         try {
@@ -157,7 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
             if (response.ok) {
                 alert(result.message); // Show success message
-                fetchComments(postId); // Reload comments to display the new comment
+                fetchComments(postId);
+                document.querySelector('.comment-input').value = ''; 
             } else {
                 alert("Failed to add comment.");
             }
@@ -265,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+
     //Add new post
     document.querySelector(".btn.post-btn").addEventListener("click", async () => {
         console.log("Post button clicked!");
@@ -300,6 +303,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    
+    async function fetchProfileImage() {
+        try {
+            const response = await fetch("/api/routes/getUserProfileImage");
+            if (!response.ok) throw new Error("Failed to fetch profile image.");
+            
+            const { profileImage } = await response.json();
+            // Update profile picture
+            profilePicture.src = profileImage ? `images/${profileImage}` : "images/mm1.png";
+        } catch (error) {
+            console.error("Error fetching profile image:", error);
+            // Set default image in case of error
+            profilePicture.src = "images/mm1.png";
+        }
+    }
+    fetchProfileImage();
+
     if (signoutLink) {
         signoutLink.addEventListener("click", async (e) => {
             e.preventDefault(); // Prevent the default link action
@@ -325,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
 
     fetchCurrentUserId();
     checkAuthentication();

@@ -197,7 +197,7 @@ exports.getAllPosts = async (req, res) => {
     try {
         // Query the database using promise-based API (mysql2)
         const [rows] = await db.promise().query(`
-            SELECT Post.post_id, Post.post_text, Post.created_at, User.firstname, User.lastname
+            SELECT Post.post_id, Post.post_text, Post.created_at, Post. user_id, User.firstname, User.lastname
             FROM Post
             JOIN User ON Post.user_id = User.user_id
             ORDER BY Post.created_at DESC

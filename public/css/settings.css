@@ -127,3 +127,21 @@ button:hover {
 .notification.read {
     background-color: #e0e0e0;
 }
+
+.profile-images {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-image {
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    transition: border-color 0.3s;
+}
+
+.profile-image:hover, .profile-image.selected {
+    border-color: #007BFF;
+}

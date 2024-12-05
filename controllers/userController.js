@@ -4,7 +4,7 @@ const db = require('../db');
 exports.registerUser = async (req, res) => {
     const { firstname, lastname, email, password } = req.body;
 
-    //Hash the password
+    // Hash the password
     const hashedPass = await bcrypt.hash(password, 10);
 
     const sql = `INSERT INTO User (firstname, lastname, email, hashedpass) VALUES (?, ?, ?, ?)`;
@@ -13,6 +13,11 @@ exports.registerUser = async (req, res) => {
             console.error(err);
             return res.status(500).json({ error: "Could not register user" });
         }
+
+        // Set the session after registration
+        const userId = result.insertId; // Get the user_id of the newly created user
+        req.session.user_id = userId; // Set the session user_id
+
         res.status(201).json({ message: "User registered successfully" });
     });
 };
@@ -182,4 +187,24 @@ exports.getUserPosts = (req, res) => {
         if (err) return res.status(500).json({ error: "Failed to fetch user posts" });
         res.status(200).json(rows);
     });
+};
+
+
+exports.getUserProfileImage = async (req, res) => {
+    const userId = req.session.user_id; // Assume user ID is stored in the session
+
+    try {
+        const [rows] = await db.promise().query(
+            "SELECT avatar_img FROM User WHERE user_id = ?",
+            [userId]
+        );
+
+        // If the user doesn't have an avatar image, return a default image
+        const profileImage = rows[0]?.avatar_img || 'mm1.png';
+
+        res.status(200).json({ profileImage });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to retrieve profile image." });
+    }
 };

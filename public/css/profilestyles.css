@@ -27,12 +27,12 @@ body {
 .profile-container a, .feed-container a {
     text-decoration: none;
     font-weight: bold;
-    color: #007BFF;  /* Keeps the color consistent with your theme */
+    color: #007BFF;  
 }
 
 .profile-container a:hover, .feed-container a:hover {
-    color: #0056b3;  /* Darker shade on hover */
-    text-decoration: underline;  /* Add underline on hover */
+    color: #0056b3;  
+    text-decoration: underline;  
 }
 
 /* Header */
@@ -65,10 +65,16 @@ header h1 {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-.sidebar h3 {
+.sidebar {
     margin-top: 0;
     text-align: center;
     color: #007BFF;
+}
+
+h3 {
+    margin-top: 0;
+    text-align: center;
+    color: #fff;
 }
 
 .sidebar ul {
@@ -181,7 +187,7 @@ textarea.comment-input {
 .post h4 {
     margin: 0 0 10px 0;
     font-size: 18px;
-    color: #007BFF;
+    color: #fff;
 }
 
 .post small {

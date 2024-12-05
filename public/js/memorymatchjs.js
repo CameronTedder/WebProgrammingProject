@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Placeholder image and card array
-    const placeholderImage = 'images/mm1.png'; // Replace with your actual images
+
+    const placeholderImage = 'images/mmback.png'; // Replace with your actual images
     const cardArray = [
         { name: 'A', img: 'images/mm1.png' },
         { name: 'B', img: 'images/mm2.png' },
@@ -134,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('You found a match!');
             cards[optionOneId].setAttribute('src', '');
             cards[optionTwoId].setAttribute('src', '');
+            cards[optionOneId].style.visibility = 'hidden'; 
+            cards[optionTwoId].style.visibility = 'hidden';
             cards[optionOneId].removeEventListener('click', flipCard);
             cards[optionTwoId].removeEventListener('click', flipCard);
             cardsWon.push(cardsChosen);

@@ -16,6 +16,7 @@ router.get("/check-auth", userController.checkAuth);
 //Profile routes
 router.get('/profile', userController.getUserProfile);  
 router.put('/profile', userController.updateUserProfile);
+router.get('/getUserProfileImage', userController.getUserProfileImage);
 
 //Other users profile routes
 router.get('/userDetails/:userId', userController.getUserDetails);

@@ -104,6 +104,11 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
 
         const data = await res.json();
         alert(data.message);
+
+        if (res.ok) {
+            // Redirect to profile page after successful registration
+            window.location.href = "profile.html";
+        }
     }
 });
 
