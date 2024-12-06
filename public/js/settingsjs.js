@@ -80,18 +80,4 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("message").textContent = "Failed to load profile2.";
         }
     }
-    // // Function to load the user's current profile data
-    // async function loadUserProfile() {
-    //     const res = await fetch("/api/routes/profile");
-    //     const data = await res.json();
-
-    //     if (res.ok) {
-    //         document.getElementById("firstname").value = data.user.firstname;
-    //         document.getElementById("lastname").value = data.user.lastname;
-    //         document.getElementById("avatar_img").value = data.user.avatar_img || "";
-    //     } else {
-    //         document.getElementById("message").textContent = data.error || "Failed to load profile.";
-    //         document.getElementById("message").style.color = "red";
-    //     }
-    // }
 });

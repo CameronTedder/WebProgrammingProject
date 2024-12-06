@@ -22,11 +22,6 @@ app.use(session({
 app.use('/api/routes', routes);
 
 
-// //Test Route
-// app.get('/', (req, res) => {
-//     res.send("Welcome to the API!");
-// });
-
 //Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, ()=> {
